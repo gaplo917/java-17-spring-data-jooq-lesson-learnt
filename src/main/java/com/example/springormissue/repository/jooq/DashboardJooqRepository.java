@@ -15,7 +15,7 @@ public class DashboardJooqRepository {
     this.dsl = dsl;
   }
 
-  public List<String> findUsernameByCommentIdAndReactionType(long userId, long commentId, int reactionType) {
+  public List<String> listDashboardUsers(long userId, long commentId, int reactionType) {
     return dsl
         .select(DEMO_USER.NAME)
         .from(DEMO_USER)

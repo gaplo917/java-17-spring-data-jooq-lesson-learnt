@@ -70,19 +70,42 @@ public class Java17Test {
 
   @Test
   void java14_local_variable_type() {
-      var stringValue = "abc";
-      var interValue = 1;
-      var longValue = 1L;
-      var Detta = (Supplier<Void>)() -> {
+
+    var java8 = (Supplier<Void>)() -> {
+      String stringValue = "abc";
+      int interValue = 1;
+      long longValue = 1L;
+      Supplier<Void> fn = () -> {
         var test = 1;
         return null;
       };
-      var list = new ArrayList<Integer>();
+      List<Integer> intList = new ArrayList<Integer>();
 
-      var strList = list
+      List<String> strList = intList
           .stream()
           .map(it -> it + stringValue)
           .collect(Collectors.toList());
+
+      return null;
+    };
+
+    var java14 = (Supplier<Void>)() -> {
+      var stringValue = "abc";
+      var interValue = 1;
+      var longValue = 1L;
+      var fn = (Supplier<Void>)() -> {
+        var test = 1;
+        return null;
+      };
+      var intList = new ArrayList<Integer>();
+
+      var strList = intList
+          .stream()
+          .map(it -> it + stringValue)
+          .collect(Collectors.toList());
+      return null;
+    };
+
   }
 
   @Test
