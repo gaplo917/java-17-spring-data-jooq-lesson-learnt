@@ -13,8 +13,11 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import static java.util.Calendar.*;
+
 @SuppressWarnings("ALL")
 public class Java17Test {
+
   @Test
   void java_9_try_with_resources_with_close() {
     var java8 = (Supplier<Void>)() -> {
@@ -79,7 +82,7 @@ public class Java17Test {
         var test = 1;
         return null;
       };
-      List<Integer> intList = new ArrayList<Integer>();
+      List<Integer> intList = new ArrayList<>();
 
       List<String> strList = intList
           .stream()
@@ -97,7 +100,7 @@ public class Java17Test {
         var test = 1;
         return null;
       };
-      var intList = new ArrayList<Integer>();
+      final var intList = new ArrayList<Integer>();
 
       var strList = intList
           .stream()
@@ -131,6 +134,15 @@ public class Java17Test {
 
   @Test
   void java14_switch_expression() {
+    var java8 = (Supplier<Void>)() -> {
+      Month month = Month.APRIL;
+      int days = 0;
+
+      if (List.of(JANUARY, MARCH, MAY, JULY, AUGUST, OCTOBER, DECEMBER).contains(month)) {
+        days = 31;
+      }
+      return null;
+    };
     var java14 = (Supplier<Void>)() -> {
       Month month = Month.APRIL;
       var days = switch (month) {
@@ -206,7 +218,6 @@ public class Java17Test {
     };
   }
 
-
   @Test
   void java16_records() {
     record Something(int id, String username) {};
@@ -222,6 +233,7 @@ public class Java17Test {
 
   // need to specific non-sealed class
   non-sealed class DesignPattern extends SoftwareEngineering {}
+
   // or need to specific final class
   final class Singleton extends DesignPattern {};
   final class FactoryPattern extends DesignPattern {};
@@ -229,4 +241,31 @@ public class Java17Test {
   // (open class) does not work
 //  class DesignPattern extends SoftwareEngineering {}
 
+  public interface Toxic {
+
+    void eatTamJai();
+
+    void surfLihkg();
+
+    int meetWithPeople();
+
+    /**
+     * Assume 0.1% chance can convert girl friend from normal friends
+     * @return
+     * @since java 8
+     */
+    default int makeGirlFriends(){
+      // can use private method in interface
+      return makeFriends() / 1000;
+    }
+
+    /**
+     * Assume 0.1% chance convert make friends
+     * @return
+     * @since java 17
+     */
+    private int makeFriends(){
+      return meetWithPeople() / 1000;
+    }
+  }
 }
