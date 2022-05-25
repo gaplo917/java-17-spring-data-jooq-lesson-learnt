@@ -7,8 +7,8 @@ public interface ReactionService {
 
   Reaction createReactionEfficient(long userId, long postId, long commentId, int reactionType);
 
-  int deleteReaction(long userId, long postId, long commentId, int reactionType);
+  int deleteReaction(long userId, long postId, long commentId);
 
-  int deleteReactionEfficient(long userId, long postId, long commentId, int reactionType);
+  int deleteReactionEfficient(long userId, long postId, long commentId);
 
 }

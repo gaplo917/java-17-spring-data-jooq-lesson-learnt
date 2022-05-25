@@ -1,7 +1,26 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        /* See above for the correct groupId */
+        classpath 'org.jooq:jooq-codegen:3.16.6'
+    }
+
+    configurations['classpath'].resolutionStrategy.eachDependency {
+        if (requested.group == 'org.jooq') {
+            useVersion '3.16.1'
+        }
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.6.7'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'nu.studer.jooq' version "7.1.1"
 }
 
 group = 'com.example'
@@ -14,10 +33,19 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.postgresql:postgresql'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    implementation 'org.postgresql:postgresql'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    jooqGenerator 'org.postgresql:postgresql:42.3.2'
+    jooqGenerator 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
+
+    implementation 'org.jooq:jooq:3.16.6'
+
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -26,6 +54,70 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.24'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
 }
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+            srcDir 'build/generated-src/jooq/main'
+        }
+    }
+}
+import org.jooq.meta.jaxb.Logging
+jooq {
+    configurations {
+        main {  // name of the jOOQ configuration
+            generateSchemaSourceOnCompilation = true  // default (can be omitted)
+
+            generationTool {
+                logging = Logging.DEBUG
+                jdbc {
+                    driver = 'org.postgresql.Driver'
+                    url = 'jdbc:postgresql://localhost:5432/test_database'
+                    user = 'admin'
+                    password = 'admin'
+                }
+                generator {
+                    name = 'org.jooq.codegen.DefaultGenerator'
+                    database {
+                        name = 'org.jooq.meta.postgres.PostgresDatabase'
+                        inputSchema = 'public'
+                    }
+                    generate {
+                        deprecated = false
+                        records = true
+                        immutablePojos = true
+                        fluentSetters = true
+                    }
+                    target {
+                        packageName = 'com.example.jooq.generated'
+                        directory = 'build/generated-src/jooq/main'  // default (can be omitted)
+                    }
+                    strategy.name = 'org.jooq.codegen.DefaultGeneratorStrategy'
+                }
+            }
+        }
+    }
+}
+
+//import org.jooq.codegen.GenerationTool
+//import org.jooq.meta.jaxb.*
+//
+//GenerationTool.generate(new Configuration()
+//        .withJdbc(new Jdbc()
+//                .withDriver('org.postgresql.Driver')
+//                .withUrl('jdbc:postgresql://localhost:5432/test_database')
+//                .withUser('admin')
+//                .withPassword('admin'))
+//        .withGenerator(new Generator()
+//                .withDatabase(new Database())
+//                .withGenerate(new Generate()
+//                        .withPojos(true)
+//                        .withDaos(true))
+//                .withTarget(new Target()
+//                        .withPackageName('com.example.jooq.generated')
+//                        .withDirectory('src/main/java'))))
+//
+
 
 tasks.named('test') {
     useJUnitPlatform()

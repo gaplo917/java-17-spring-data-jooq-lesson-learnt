@@ -1,8 +1,12 @@
 package com.example.springormissue.repository;
 
 import com.example.springormissue.entity.Reaction;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+
+import java.sql.ResultSet;
+import java.util.List;
 
 public interface ReactionRepository extends PagingAndSortingRepository<Reaction, Long> {
 
@@ -23,5 +27,17 @@ public interface ReactionRepository extends PagingAndSortingRepository<Reaction,
          RETURNING *;
       """, nativeQuery = true)
   Reaction createReactionNative(long ownerId, long postId, long commentId, int reactionType);
+
+  int deleteByOwnerIdAndPostIdAndCommentId(long ownerId, long postId, long commentId);
+
+  @Modifying
+  @Query(value = """
+        DELETE FROM demo_reaction
+        WHERE owner_id = :ownerId
+        AND post_id = :postId
+        AND comment_id = :commentId
+        RETURNING id;
+      """, nativeQuery = true)
+  List<Long> deleteByOwnerIdAndPostIdAndCommentIdNative(long ownerId, long postId, long commentId);
 
 }

@@ -7,16 +7,17 @@ import com.example.springormissue.repository.ReactionRepository;
 import com.example.springormissue.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ReactionServiceImpl implements ReactionService {
-  final ReactionRepository reactionRepository;
+  private final ReactionRepository reactionRepository;
 
-  final CommentRepository commentRepository;
+  private final CommentRepository commentRepository;
 
-  final UserRepository userRepository;
+  private final UserRepository userRepository;
 
-  final PostRepository postRepository;
+  private final PostRepository postRepository;
 
   @Autowired
   public ReactionServiceImpl(
@@ -61,12 +62,14 @@ public class ReactionServiceImpl implements ReactionService {
   }
 
   @Override
-  public int deleteReaction(long userId, long postId, long commentId, int reactionType) {
-    return 0;
+  @Transactional
+  public int deleteReaction(long userId, long postId, long commentId) {
+    return reactionRepository.deleteByOwnerIdAndPostIdAndCommentId(userId, postId, commentId);
   }
 
   @Override
-  public int deleteReactionEfficient(long userId, long postId, long commentId, int reactionType) {
-    return 0;
+  @Transactional
+  public int deleteReactionEfficient(long userId, long postId, long commentId) {
+    return reactionRepository.deleteByOwnerIdAndPostIdAndCommentIdNative(userId, postId, commentId).size();
   }
 }

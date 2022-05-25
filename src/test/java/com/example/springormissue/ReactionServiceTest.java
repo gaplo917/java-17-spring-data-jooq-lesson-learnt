@@ -9,13 +9,13 @@ import org.springframework.dao.DataIntegrityViolationException;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class ReactionServiceTest {
+class ReactionServiceTest extends BaseDataTest {
 
   @Autowired
   ReactionService reactionService;
 
   @Test
-  void createReaction() {
+  void reaction_should_be_created() {
     // Assume you get the information from controller
     long userId = 2;
     long postId = 1;
@@ -33,7 +33,7 @@ class ReactionServiceTest {
   }
 
   @Test
-  void createDuplicateReaction() {
+  void duplicated_reaction_insert_should_throw() {
     long userId = 1;
     long postId = 1;
     long commentId = 1;
@@ -45,7 +45,7 @@ class ReactionServiceTest {
   }
 
   @Test
-  void createReactionWithNonExistUser() {
+  void reaction_with_non_exist_user_should_throw() {
     long userId = 100;
     long postId = 1;
     long commentId = 1;
@@ -58,7 +58,7 @@ class ReactionServiceTest {
 
 
   @Test
-  void createReactionEfficient() {
+  void reaction_should_be_created_efficiently() {
     long userId = 2;
     long postId = 2;
     long commentId = 2;
@@ -74,7 +74,7 @@ class ReactionServiceTest {
   }
 
   @Test
-  void createDuplicateReactionEfficient() {
+  void duplicated_reaction_insert_should_be_throw_efficiently() {
     long userId = 1;
     long postId = 1;
     long commentId = 1;
@@ -86,7 +86,7 @@ class ReactionServiceTest {
   }
 
   @Test
-  void createReactionEfficientWithNonExistUser() {
+  void reaction_with_non_exist_user_should_throw_efficiently() {
     long userId = 100;
     long postId = 1;
     long commentId = 1;
@@ -95,5 +95,17 @@ class ReactionServiceTest {
     assertThrows(DataIntegrityViolationException.class, () -> {
       reactionService.createReactionEfficient(userId, postId, commentId, reactionType);
     });
+  }
+
+  @Test
+  void reaction_should_be_deleted() {
+    var result = reactionService.deleteReaction(3, 1, 1);
+    assertTrue(result > 0);
+  }
+  @Test
+  void reaction_should_be_deleted_efficiently() {
+    var result = reactionService.deleteReactionEfficient(4, 1, 1);
+
+    assertTrue(result > 0);
   }
 }
