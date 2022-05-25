@@ -1,4 +1,4 @@
-package com.example.springormissue;
+package com.gaplotech.lesson.one;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

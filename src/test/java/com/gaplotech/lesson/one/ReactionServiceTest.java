@@ -1,6 +1,6 @@
-package com.example.springormissue;
+package com.gaplotech.lesson.one;
 
-import com.example.springormissue.service.ReactionService;
+import com.gaplotech.lesson.one.service.ReactionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

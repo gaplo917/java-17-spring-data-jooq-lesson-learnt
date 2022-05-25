@@ -1,4 +1,4 @@
-package com.example.springormissue;
+package com.gaplotech.lesson.one;
 
 import org.junit.jupiter.api.Test;
 
@@ -66,9 +66,6 @@ public class Java17Test {
       List.of(1,2);
       return null;
     };
-
-
-
   }
 
   @Test
@@ -137,12 +134,22 @@ public class Java17Test {
     var java8 = (Supplier<Void>)() -> {
       Month month = Month.APRIL;
       int days = 0;
+      switch (month) {
+        case JANUARY, MARCH, MAY, JULY, AUGUST, OCTOBER, DECEMBER:
+          days = 31;
+          break;
+        case FEBRUARY:
+          days = 28;
+          break;
+        case APRIL, JUNE, SEPTEMBER, NOVEMBER:
+          days = 30;
+          break;
+        default: throw new IllegalArgumentException("no match month");
+      };
 
-      if (List.of(JANUARY, MARCH, MAY, JULY, AUGUST, OCTOBER, DECEMBER).contains(month)) {
-        days = 31;
-      }
       return null;
     };
+
     var java14 = (Supplier<Void>)() -> {
       Month month = Month.APRIL;
       var days = switch (month) {
@@ -150,7 +157,7 @@ public class Java17Test {
         case FEBRUARY -> 28;
         case APRIL, JUNE, SEPTEMBER, NOVEMBER -> {
           System.out.println(month);
-          yield 20;
+          yield 30;
         }
         default -> throw new IllegalArgumentException("no match month");
       };

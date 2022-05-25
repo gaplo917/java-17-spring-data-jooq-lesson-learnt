@@ -1,4 +1,4 @@
-package com.example.springormissue.repository.jooq;
+package com.gaplotech.lesson.one.repository.jooq;
 
 import com.example.jooq.generated.tables.pojos.DemoReaction;
 import org.jooq.DSLContext;

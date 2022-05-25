@@ -1,6 +1,6 @@
-package com.example.springormissue;
+package com.gaplotech.lesson.one;
 
-import com.example.springormissue.repository.jooq.ReactionJooqRepository;
+import com.gaplotech.lesson.one.repository.jooq.ReactionJooqRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

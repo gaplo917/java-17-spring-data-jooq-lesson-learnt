@@ -1,11 +1,10 @@
-package com.example.springormissue.repository;
+package com.gaplotech.lesson.one.repository;
 
-import com.example.springormissue.entity.Reaction;
+import com.gaplotech.lesson.one.entity.Reaction;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import java.sql.ResultSet;
 import java.util.List;
 
 public interface ReactionRepository extends PagingAndSortingRepository<Reaction, Long> {

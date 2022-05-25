@@ -1,10 +1,10 @@
-package com.example.springormissue.service;
+package com.gaplotech.lesson.one.service;
 
-import com.example.springormissue.entity.Reaction;
-import com.example.springormissue.repository.CommentRepository;
-import com.example.springormissue.repository.PostRepository;
-import com.example.springormissue.repository.ReactionRepository;
-import com.example.springormissue.repository.UserRepository;
+import com.gaplotech.lesson.one.entity.Reaction;
+import com.gaplotech.lesson.one.repository.CommentRepository;
+import com.gaplotech.lesson.one.repository.PostRepository;
+import com.gaplotech.lesson.one.repository.ReactionRepository;
+import com.gaplotech.lesson.one.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,4 +1,4 @@
-package com.example.springormissue;
+package com.gaplotech.lesson.one;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;

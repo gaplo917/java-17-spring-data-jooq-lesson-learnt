@@ -1,4 +1,4 @@
-package com.example.springormissue.entity;
+package com.gaplotech.lesson.one.entity;
 
 import lombok.*;
 

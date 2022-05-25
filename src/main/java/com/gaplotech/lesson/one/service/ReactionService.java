@@ -1,6 +1,6 @@
-package com.example.springormissue.service;
+package com.gaplotech.lesson.one.service;
 
-import com.example.springormissue.entity.Reaction;
+import com.gaplotech.lesson.one.entity.Reaction;
 
 public interface ReactionService {
   Reaction createReaction(long userId, long postId, long commentId, int reactionType);

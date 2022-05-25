@@ -1,4 +1,4 @@
-package com.example.springormissue.config;
+package com.gaplotech.lesson.one.config;
 
 import org.jooq.DSLContext;
 import org.jooq.ExecuteContext;

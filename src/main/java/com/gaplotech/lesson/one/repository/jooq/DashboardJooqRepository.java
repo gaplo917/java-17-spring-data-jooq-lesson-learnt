@@ -1,4 +1,4 @@
-package com.example.springormissue.repository.jooq;
+package com.gaplotech.lesson.one.repository.jooq;
 
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;

@@ -1,3 +1,12 @@
+# Get Started
+
+```bash
+# launch postgresql in docker
+docker-compose up -d
+```
+
+Run the test case in Intellij and read the result.
+
 # Java 17 new features
 TBC
 
